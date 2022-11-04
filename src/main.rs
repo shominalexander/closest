@@ -1,14 +1,17 @@
 fn main() {
- let     exists: bool = std::path::Path::new(".\\vector.txt").exists();
- let mut input : String = String::new()                               ;
+ let mut content: String = String::new()                               ;
+ let     exists : bool = std::path::Path::new(".\\vector.txt").exists();
+ let mut input  : String = String::new()                               ;
 
  if exists {
-  input = std::fs::read_to_string(".\\vector.txt").expect("Failed file reading!");
+  content = std::fs::read_to_string(".\\vector.txt").expect("Failed file reading!");
 
  }//if exists {
 
  loop {
   if exists {
+   input = content.clone();
+
    if input.trim().is_empty() {
     println!("\r\n\r\nvector:");
 
@@ -26,8 +29,9 @@ fn main() {
    std::io::stdin().read_line(&mut input).expect("Input failed");
   }//} else {//if exists {
 
-  input = input.replace("\n", "");
-  input = input.replace("\r", "");
+  input = input.trim().to_string();
+  input = input.replace("\n", "") ;
+  input = input.replace("\r", "") ;
 
   if &input[..] == "exit" {
    break;   
@@ -48,76 +52,76 @@ fn main() {
    input = input.replace("\n", "");
    input = input.replace("\r", "");
 
-   let target: i32 = (&input[..]).trim().parse().expect("Wrong format");
+   if &input[..] == "exit" {
+    break;   
 
-   integer.sort();
+   } else {//if &input[..] == "exit" {
+    let target: i32 = (&input[..]).trim().parse().expect("Wrong format");
 
-   if size > 2usize {
-    let n: usize = size - 2usize;
+    integer.sort();
 
-    for i in 0..n {
-     let mut j: usize = i + 1usize;
-     let mut k: usize = n + 1usize;
+    if size > 2usize {
+     let n: usize = size - 2usize;
 
-     while j < k {
-      let sum: i32 = integer[i] + integer[j] + integer[k];
+     for i in 0..n {
+      let mut j: usize = i + 1usize;
+      let mut k: usize = n + 1usize;
 
-      if sum == target {
-       equal = true;
+      while j < k {
+       let sum: i32 = integer[i] + integer[j] + integer[k];
+
+       if sum == target {
+        equal = true;
  
-       break;
+        break;
 
-      } else {//if sum == target {
-       let difference: i32;
+       } else {//if sum == target {
+        let difference: i32;
 
-       if sum < target {
-        difference = target - sum;
+        if sum < target {
+         difference = target - sum;
 
-       } else {//if sum < target {
-        difference = sum - target;
+        } else {//if sum < target {
+         difference = sum - target;
 
-       }//} else {//if sum < target {
+        }//} else {//if sum < target {
 
-       if i == 0 && j == 1 && k == n + 1usize {
-        closest = sum       ;
-        minimum = difference;
-
-       } else {//if i == 0 && j == 1 && k == n + 1usize {
-        if difference < minimum {
+        if i == 0 && j == 1 && k == n + 1usize {
          closest = sum       ;
          minimum = difference;
-        }//if difference < minimum {
-       }//} else {//if i == 0 && j == 1 && k == n + 1usize {
 
-       if sum < target {
-        j += 1;
+        } else {//if i == 0 && j == 1 && k == n + 1usize {
+         if difference < minimum {
+          closest = sum       ;
+          minimum = difference;
+         }//if difference < minimum {
+        }//} else {//if i == 0 && j == 1 && k == n + 1usize {
 
-       } else {//if sum < target {
-        k -= 1;
+        if sum < target {
+         j += 1;
 
-       }//} else {//if sum < target {
-      }//} else {//if sum == target {
-     }//while j < k {
+        } else {//if sum < target {
+         k -= 1;
 
-     if equal {
-      break;
+        }//} else {//if sum < target {
+       }//} else {//if sum == target {
+      }//while j < k {
 
-     }//if equal {
-    }//for i in 0..n {
-   }//if size > 2usize {
+      if equal {
+       break;
 
-   if equal {
-    println!("\r\nclosest:\r\n{:?}", target);
+      }//if equal {
+     }//for i in 0..n {
+    }//if size > 2usize {
 
-   } else {//if equal {
-    println!("\r\nclosest:\r\n{:?}", closest);
+    if equal {
+     println!("\r\nclosest:\r\n{:?}", target);
 
-   }//if equal {//} else {//if equal {
+    } else {//if equal {
+     println!("\r\nclosest:\r\n{:?}", closest);
+
+    }//if equal {//} else {//if equal {
+   }//} else {//if &input[..] == "exit" {
   }//} else {//if &input[..] == "exit" {
-
-  if exists {
-   break;
-
-  }//if exists {
  }//loop {
 }//fn main() {
