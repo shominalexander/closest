@@ -1,33 +1,10 @@
 fn main() {
- let mut content: String = String::new()                               ;
- let     exists : bool = std::path::Path::new(".\\vector.txt").exists();
- let mut input  : String = String::new()                               ;
-
- if exists {
-  content = std::fs::read_to_string(".\\vector.txt").expect("Failed file reading!");
-
- }//if exists {
-
  loop {
-  if exists {
-   input = content.clone();
+  let mut input: String = String::new();
+ 
+  println!("\r\n\r\nvector:");
 
-   if input.trim().is_empty() {
-    println!("\r\n\r\nvector:");
-
-    std::io::stdin().read_line(&mut input).expect("Input failed");
-   }//if input.trim().is_empty() {
-
-  } else {//if exists {
-   if !input.trim().is_empty() {
-    input = String::new();
-
-   }//if !input.trim().is_empty() {
-
-   println!("\r\n\r\nvector:");
-
-   std::io::stdin().read_line(&mut input).expect("Input failed");
-  }//} else {//if exists {
+  std::io::stdin().read_line(&mut input).expect("Input failed");
 
   input = input.trim().to_string();
   input = input.replace("\n", "") ;
