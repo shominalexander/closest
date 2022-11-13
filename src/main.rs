@@ -1,14 +1,22 @@
+fn request() -> String {
+ let mut value: String = String::new();
+
+ std::io::stdin().read_line(&mut value).expect("Input failed");
+
+ value = value.trim().to_string();
+ value = value.replace("\n", "") ;
+ value = value.replace("\r", "") ;
+
+ value
+}//fn request() -> String {
+
 fn main() {
  loop {
   let mut input: String = String::new();
  
   println!("\r\n\r\nvector:");
 
-  std::io::stdin().read_line(&mut input).expect("Input failed");
-
-  input = input.trim().to_string();
-  input = input.replace("\n", "") ;
-  input = input.replace("\r", "") ;
+  input = request();
 
   if &input[..] == "exit" {
    break;   
@@ -22,12 +30,7 @@ fn main() {
 
    println!("\r\ntarget:");
 
-   input = String::new();
-
-   std::io::stdin().read_line(&mut input).expect("Input failed");
-
-   input = input.replace("\n", "");
-   input = input.replace("\r", "");
+   input = request();
 
    if &input[..] == "exit" {
     break;   
