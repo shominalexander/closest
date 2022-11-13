@@ -12,11 +12,9 @@ fn request() -> String {
 
 fn main() {
  loop {
-  let mut input: String = String::new();
- 
   println!("\r\n\r\nvector:");
 
-  input = request();
+  let mut input: String = request();
 
   if &input[..] == "exit" {
    break;   
